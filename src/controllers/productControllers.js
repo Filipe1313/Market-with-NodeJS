@@ -39,7 +39,7 @@ module.exports = {
             const result = await ProductModel.create(req.body)
             res.status(201).json({ message: `O produto ${result._doc.nome} foi criado com sucesso!` })
         } catch (error) {
-            res.status(500).json({ message: `Não foi possivel criar o estudande ${req.body.name}` })
+            res.status(500).json({ message: `Não foi possivel criar o produto ${req.body.nome}` })
         }
     },
 
