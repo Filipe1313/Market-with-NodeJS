@@ -1,15 +1,15 @@
-const UserModel = require('../models/userModel')
+const ClienteModel = require('../models/clienteModel')
 
 module.exports = {
     getUser: (req, res) => {
-        UserModel.find({}).then((result) => {
+        ClienteModel.find({}).then((result) => {
             res.status(200).json(result._doc);
         }).catch(() => {
             res.status(500).json({ message: "Não foi possivel recuperar os usuarios." })
         })
     },
     createUser: (req, res) => {
-        UserModel.create(req.body).then((result) => {
+        ClienteModel.create(req.body).then((result) => {
             res.status(200).json(result)
 
 
@@ -22,14 +22,14 @@ module.exports = {
 
     },
     updateUser: (req, res) => {
-        
+
 
     },
 
     authenticUser: (req, res) => {
         User.find
 
-        
+
     },
 
 }

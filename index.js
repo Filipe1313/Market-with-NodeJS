@@ -29,8 +29,8 @@ const app = express()
 
 
 // Passando o roteador do usuario.
-const userRouter = require('./src/routers/userRouter')
-const productRouter = require('./src/routers/productRouter')
+const productRouter = require('./src/routers/productRouter');
+const clienteRouter = require('./src/routers/clienteRouter');
 
 
 
@@ -38,7 +38,7 @@ const productRouter = require('./src/routers/productRouter')
 app.use(express.json());
 
 //Router do usuario.
-app.use(userRouter);
+app.use(clienteRouter);
 app.use(productRouter);
 
 
