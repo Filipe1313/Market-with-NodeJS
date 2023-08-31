@@ -15,10 +15,9 @@ productRouter.route('/api/produtos')
         // Criar um novo produto.
         productControllers.createProduct(req, res)
     })
-    .put((req, res) => {
-        // Atualizar um produto.
-        productControllers.updateProduct(req, res);
-    })
+
+
+
 
 
 
@@ -27,11 +26,11 @@ productRouter.route('/api/produtos/:id')
         productControllers.getProduct(req, res)
         // pegar produto especifico
     })
+    .put((req, res) => {
+        // Atualizar um produto.
+        productControllers.updateProduct(req, res);
+    });
 
-    .delete((req, res) => {
-        productControllers.deleteProductById(req, res);
-        // delete produto
-    })
 
 
 module.exports = productRouter;

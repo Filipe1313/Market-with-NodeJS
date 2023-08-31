@@ -1,2 +1,11 @@
 node_modules
 .env
+
+
+1. Logar no sistema
+1. Recurso protegido para um usuario autenticado.
+------------------
+To work:
+1. Crud de promoção
+1. Método compra é necessario: (Produto, Preco, DataDaCompra)
+

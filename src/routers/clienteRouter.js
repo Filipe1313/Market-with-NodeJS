@@ -28,13 +28,18 @@ clienteRouter.route('/api/user')
     })
 
 
+
 clienteRouter.route('/api/user/:id')
-    .get((req, res) => {
-        clienteControllers.deleteUser
-    })
+
     .put((req, res) => {
-        clienteControllers.updateUser
+        clienteControllers.updateUser(req, res);
+    })
+    .delete((req, res) => {
+        clienteControllers.deleteUserById(req, res);
+
     });
+
+
 
 module.exports = clienteRouter;
 

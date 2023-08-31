@@ -4,7 +4,7 @@ const ProductModel = require('../models/productModel');
 module.exports = {
     getProdutos: (req, res) => {
         ProductModel.find({}).then((result) => {
-            req.status(200).json(result);
+            res.status(200).json(result);
         }).catch(() => {
             res.status(500).json({ message: "Ocorreu um erro !" })
         })
@@ -13,7 +13,7 @@ module.exports = {
     // Deletar produto pelo Codigo.
     deleteProductById: async (req, res) => {
         try {
-            const result = await ProductModel.deleteOne({ codigo: req.params.codigo })
+            const result = await ProductModel.deleteProductById({ _id: req.params.id })
             res.status(200).send({ message: "Produto deletado com sucesso!" })
         } catch (err) {
             res.status(500).json({ message: "Não foi possivel remover o produto" })

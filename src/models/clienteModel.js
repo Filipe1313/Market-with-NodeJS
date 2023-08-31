@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+
 const clienteSchema = new Schema({
     nome: { type: String, required: true },
     idade: { type: String, required: true },
