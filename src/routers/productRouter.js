@@ -2,7 +2,6 @@ const express = require('express');
 const productRouter = express.Router();
 const productControllers = require('../controllers/productControllers')
 const app = express();
-const port = process.env.port || 3000
 
 app.use(express.json());
 

@@ -3,7 +3,6 @@ const express = require('express');
 const funcionarioRouter = express.Router()
 const funcionarioControllers = require('../controllers/funcionarioControllers')
 const app = express();
-const port = process.env.port || 3000
 
 app.use(express.json());
 
@@ -27,7 +26,7 @@ funcionarioRouter.route('/api/funcionario')
         funcionarioControllers.getFuncionario(req, res);
     })
     .post((req, res) => {
-        funcionarioControllers.updateProducts(req, res);
+        funcionarioControllers.inserirPromocao(req, res);
     })
 
 
@@ -41,6 +40,17 @@ funcionarioRouter.route('/api/funcionario/:id')
         funcionarioControllers.deleteFuncionarioById(req, res);
 
     });
+
+funcionarioRouter.route('/api/funcionario/produtos')
+    .put((req, res) => {
+        funcionarioControllers.updateProducts(req, res);
+    })
+    .post((req, res) => {
+        funcionarioControllers.removerPromocao(req, res);
+    })
+
+
+
 
 
 

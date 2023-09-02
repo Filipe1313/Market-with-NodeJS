@@ -3,7 +3,6 @@ const express = require('express');
 const clienteRouter = express.Router()
 const clienteControllers = require('../controllers/clienteControllers')
 const app = express();
-const port = process.env.port || 3000
 
 app.use(express.json());
 
@@ -42,6 +41,3 @@ clienteRouter.route('/api/user/:id')
 
 
 module.exports = clienteRouter;
-
-
-// app.get/put/delete etc..

@@ -22,20 +22,20 @@ module.exports = {
     // deletar usuario
     deleteUserById: async (req, res) => {
         try {
-            
-            const result = await ClienteModel.findByIdAndDelete({ _id: req.params.id });
+
+            await ClienteModel.findByIdAndDelete({ _id: req.params.id });
             res.status(200).send({ message: "cliente removido com sucesso" });
         } catch (err) {
-            res
-                .status(500)
-                .json({ message: "Não foi possivel remover o cliente." });
+
+            res.status(500)
+            res.json({ message: "Não foi possivel remover o cliente." });
         }
     },
 
-    // ADICIONADO REMOTAMENTE POR MIGUELZIN, TESTAR ANTES DE VALIDAR:
+    // Atualização de usuario 
     updateUser: async (req, res) => {
         try {
-            const resultado = await ClienteModel.updateOne(
+            await ClienteModel.updateOne(
                 { cpf: req.body.cpf },
                 req.body
             );
@@ -46,11 +46,5 @@ module.exports = {
     },
 
 
-
-    authenticUser: (req, res) => {
-        //User.find
-
-
-    },
 
 }
