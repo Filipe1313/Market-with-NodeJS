@@ -9,7 +9,7 @@ const productSchema = new Schema({
     precoprom: { type: Number, required: true },
     categoria: { type: String, required: true },
     validade: { type: String, required: true },
-    quantidade: {}
+    quantidade: { type: Number, required: true },
 
 })
 

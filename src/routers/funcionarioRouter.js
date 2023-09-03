@@ -8,16 +8,6 @@ app.use(express.json());
 
 
 
-funcionarioRouter.route('/api/registrofuncionario')
-    .post((req, res) => {
-        funcionarioControllers.createFuncionario(req, res);
-    })
-
-
-funcionarioRouter.route('/api/loginfuncionario')
-    .post((req, res) => {
-        funcionarioControllers.authenticFuncionario(req, res);
-    })
 
 
 

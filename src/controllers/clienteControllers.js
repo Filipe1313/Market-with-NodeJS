@@ -1,50 +1,39 @@
-const ClienteModel = require('../models/clienteModel')
+const UserModel = require('../models/userModel') // Importe o modelo User
 
 module.exports = {
-    getUser: (req, res) => {
-        ClienteModel.find({}).then((result) => {
+    // Recuperar todos os clientes
+    getClientes: (req, res) => {
+        UserModel.find({ type: 'cliente' }).then((result) => {
             res.status(200).json(result);
-        }).catch(() => {
-            res.status(500).json({ message: "Não foi possivel recuperar os clientes." })
         })
-    },
-    createUser: (req, res) => {
-        ClienteModel.create(req.body).then((result) => {
-            res.status(200).json(result)
-
-
-        }).catch((err) => {
-            res.status(500).json({ message: "Não foi possivel criar o cliente." })
-            console.log(err)
-        })
+            .catch(() => {
+                res.status(500).json({ message: "Não foi possível recuperar os clientes." });
+            });
     },
 
-    // deletar usuario
-    deleteUserById: async (req, res) => {
+
+    // Deletar cliente por ID
+    deleteClienteById: async (req, res) => {
         try {
-
-            await ClienteModel.findByIdAndDelete({ _id: req.params.id });
-            res.status(200).send({ message: "cliente removido com sucesso" });
+            await UserModel.findOneAndDelete({ _id: req.params.id, tipo: 'cliente' }); // Verifica o tipo
+            res.status(200).send({ message: "Cliente removido com sucesso." });
         } catch (err) {
-
-            res.status(500)
-            res.json({ message: "Não foi possivel remover o cliente." });
+            res.status(500).json({ message: "Não foi possível remover o cliente." });
         }
     },
 
-    // Atualização de usuario 
-    updateUser: async (req, res) => {
+    // Atualizar cliente por CPF (ou outro campo único)
+    updateCliente: async (req, res) => {
         try {
-            await ClienteModel.updateOne(
-                { cpf: req.body.cpf },
+            await UserModel.findOneAndUpdate(
+                { cpf: req.body.cpf, type: 'cliente' }, // Verifica o tipo e campo único
                 req.body
             );
-            res.status(200).send({ message: "cliente atualizado no sistema" });
+            res.status(200).send({ message: "Cliente atualizado no sistema." });
         } catch (err) {
-            res.status(500).json({ message: "Não foi possivel atualizar os dados" });
+            res.status(500).json({ message: "Não foi possível atualizar os dados do cliente." });
         }
     },
 
-
-
-}
+    // Outras funções específicas de clientes
+};

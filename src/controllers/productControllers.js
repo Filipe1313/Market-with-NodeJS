@@ -27,7 +27,7 @@ module.exports = {
             const result = await ProductModel.findById({ codigo: req.body.codigo })
             res.status(200).send(result)
         } catch (err) {
-            //Lembrete para tratar o error de forma correta !
+            
 
             res.status(500).json({ message: "Não foi possivel recuperar o produto." })
         }

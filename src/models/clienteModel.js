@@ -1,13 +1,13 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const clienteSchema = new Schema({
+    // Campos específicos para clientes
+    categoriasPreferidas: [{ type: String }]
+});
 
-    nome: { type: String, required: true },
-    idade: { type: String, required: true },
-    cpf: { type: String, required: true, unique: true },
-    senha: { type: String, required: true, unique: true }
-})
+const ClienteModel = UserModel.discriminator('Cliente', clienteSchema);
 
-module.exports = mongoose.model("ClienteModel", clienteSchema);
+module.exports = {
+    ClienteModel
+};

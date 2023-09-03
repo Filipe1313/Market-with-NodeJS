@@ -1,16 +1,44 @@
-const compraModel = require('../models/compraModel')
+const CompraModel = require('../models/compraModel');
+const ProductModel = require('../models/productModel');
+const ClienteModel = require('../models/clienteModel');
+
 
 module.exports = {
-    comprarProduto: async (req, res) => {
+    realizarCompra: async (req, res) => {
         try {
-            if (!req.body.produto || !req.body.data || !req.body.preco) {
-                res.status(400).json({ message: "Está faltando algo para concluir sua compra" })
+            // Coleta os detalhes da compra do corpo da requisição
+            const { clienteId, produtoId, data } = req.body;
+
+            // Encontra o cliente com base no ID
+            const cliente = await ClienteModel.findById(clienteId);
+
+            if (!cliente) {
+                return res.status(404).json({ message: "Cliente não encontrado." });
             }
-            const result = compraModel.create(req.body).then(() => {
-                res.status(200).json(result)
-            })
-        } catch (error) {
-            res.status(500).json({ message: "Não foi possivel fazer sua compra" })
+
+            // Encontra o produto com base no ID
+            const produto = await ProductModel.findById(produtoId);
+
+            if (!produto) {
+                return res.status(404).json({ message: "Produto não encontrado." });
+            }
+
+            // Associe as categorias do produto às categorias preferidas do cliente
+            cliente
+
+
+            await CompraModel.create({
+                produto: produtoId,
+                data: data,
+                cliente: clienteId
+            });
+
+
+            await cliente.save();
+
+            res.status(200).json({ message: "Compra realizada com sucesso." });
+        } catch (err) {
+            res.status(500).json({ message: "Não foi possível realizar a compra." });
         }
     }
-}
+};
