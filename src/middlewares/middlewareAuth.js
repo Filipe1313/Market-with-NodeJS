@@ -3,12 +3,10 @@ const jwtService = require('jsonwebtoken')
 module.exports = async (req, res, next) => {
 
     const route = req.path
-    const nonSecurityRoutes = ['/createUser', '/login']
+    const nonSecurityRoutes = ['/api/register', '/api/login']
     if (nonSecurityRoutes.includes(route)) {
         return next()
     }
-
-
 
 
     let token = req.headers.authorization

@@ -1,16 +1,54 @@
-const compraModel = require('../models/compraModel')
+const CompraModel = require('../models/compraModel');
+const ProductModel = require('../models/productModel');
+const userModel = require('../models/userModel');
+
 
 module.exports = {
-    comprarProduto: async (req, res) => {
+    realizarCompra: async (req, res) => {
         try {
-            if (!req.body.produto || !req.body.data || !req.body.preco) {
-                res.status(400).json({ message: "Está faltando algo para concluir sua compra" })
+            // Coleta os detalhes da compra do corpo da requisição
+            const { clienteId, produtoId, data } = req.body;
+
+            // Encontra o cliente com base no ID
+            let user = await userModel.findById(clienteId);
+
+            if (!user) {
+                return res.status(404).json({ message: "Cliente não encontrado." });
             }
-            const result = compraModel.create(req.body).then(() => {
-                res.status(200).json(result)
-            })
-        } catch (error) {
-            res.status(500).json({ message: "Não foi possivel fazer sua compra" })
+
+            // Encontra o produto com base no ID
+            const produto = await ProductModel.findById(produtoId);
+
+            if (!produto) {
+                return res.status(404).json({ message: "Produto não encontrado." });
+            }
+
+            if(!user.cliente){
+                user.cliente = {
+                    categoriasPreferidas: []
+                }
+            }
+            
+            user.cliente.categoriasPreferidas.push(produto.categoria);           
+
+
+            await CompraModel.create({
+                produto: {
+                    nome: produto.nome,
+                    preco: produto.preco
+                },
+                
+                cliente: clienteId,
+                data: data
+                
+            });
+
+
+            await user.save();
+
+            res.status(200).json({ message: "Compra realizada com sucesso." });
+        } catch (err) {
+            res.status(500).json({ message: "Não foi possível realizar a compra." });
         }
     }
-}
+};

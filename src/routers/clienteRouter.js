@@ -8,33 +8,26 @@ app.use(express.json());
 
 
 
-clienteRouter.route('/api/registro')
-    .post((req, res) => {
-        clienteControllers.createUser(req, res);
-    })
 
 
-clienteRouter.route('/api/login')
-    .post((req, res) => {
-        clienteControllers.authenticUser(req, res);
-    })
-
-
-
-clienteRouter.route('/api/user')
+clienteRouter.route('/api/clientes')
     .get((req, res) => {
-        clienteControllers.getUser(req, res);
+        clienteControllers.getClientes(req, res);
+    })
+
+clienteRouter.route('/api/:id/recomendados')
+    .get((req, res) => {
+        clienteControllers.getProdutosPreferidos(req, res);
     })
 
 
-
-clienteRouter.route('/api/user/:id')
+clienteRouter.route('/api/cliente/:id')
 
     .put((req, res) => {
-        clienteControllers.updateUser(req, res);
+        clienteControllers.updateCliente(req, res);
     })
     .delete((req, res) => {
-        clienteControllers.deleteUserById(req, res);
+        clienteControllers.deleteClienteById(req, res);
 
     });
 

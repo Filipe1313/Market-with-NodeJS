@@ -13,7 +13,7 @@ module.exports = {
     // Deletar produto pelo Codigo.
     deleteProductById: async (req, res) => {
         try {
-            const result = await ProductModel.deleteProductById({ _id: req.params.id })
+            await ProductModel.deleteProductById({ _id: req.params.id })
             res.status(200).send({ message: "Produto deletado com sucesso!" })
         } catch (err) {
             res.status(500).json({ message: "Não foi possivel remover o produto" })
@@ -27,7 +27,7 @@ module.exports = {
             const result = await ProductModel.findById({ codigo: req.body.codigo })
             res.status(200).send(result)
         } catch (err) {
-            //Lembrete para tratar o error de forma correta !
+            
 
             res.status(500).json({ message: "Não foi possivel recuperar o produto." })
         }

@@ -8,22 +8,12 @@ app.use(express.json());
 
 
 
-funcionarioRouter.route('/api/registrofuncionario')
-    .post((req, res) => {
-        funcionarioControllers.createFuncionario(req, res);
-    })
-
-
-funcionarioRouter.route('/api/loginfuncionario')
-    .post((req, res) => {
-        funcionarioControllers.authenticFuncionario(req, res);
-    })
 
 
 
 funcionarioRouter.route('/api/funcionario')
     .get((req, res) => {
-        funcionarioControllers.getFuncionario(req, res);
+        funcionarioControllers.getFuncionarios(req, res);
     })
     .post((req, res) => {
         funcionarioControllers.inserirPromocao(req, res);
@@ -41,7 +31,7 @@ funcionarioRouter.route('/api/funcionario/:id')
 
     });
 
-funcionarioRouter.route('/api/funcionario/produtos')
+funcionarioRouter.route('/api/:id/produtos')
     .put((req, res) => {
         funcionarioControllers.updateProducts(req, res);
     })
