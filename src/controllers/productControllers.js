@@ -13,7 +13,7 @@ module.exports = {
     // Deletar produto pelo Codigo.
     deleteProductById: async (req, res) => {
         try {
-            const result = await ProductModel.deleteProductById({ _id: req.params.id })
+            await ProductModel.deleteProductById({ _id: req.params.id })
             res.status(200).send({ message: "Produto deletado com sucesso!" })
         } catch (err) {
             res.status(500).json({ message: "Não foi possivel remover o produto" })

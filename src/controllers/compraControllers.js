@@ -1,6 +1,6 @@
 const CompraModel = require('../models/compraModel');
 const ProductModel = require('../models/productModel');
-const ClienteModel = require('../models/clienteModel');
+const userModel = require('../models/userModel');
 
 
 module.exports = {
@@ -10,9 +10,9 @@ module.exports = {
             const { clienteId, produtoId, data } = req.body;
 
             // Encontra o cliente com base no ID
-            const cliente = await ClienteModel.findById(clienteId);
+            let user = await userModel.findById(clienteId);
 
-            if (!cliente) {
+            if (!user) {
                 return res.status(404).json({ message: "Cliente não encontrado." });
             }
 
@@ -23,18 +23,28 @@ module.exports = {
                 return res.status(404).json({ message: "Produto não encontrado." });
             }
 
-            // Associe as categorias do produto às categorias preferidas do cliente
-            cliente
+            if(!user.cliente){
+                user.cliente = {
+                    categoriasPreferidas: []
+                }
+            }
+            
+            user.cliente.categoriasPreferidas.push(produto.categoria);           
 
 
             await CompraModel.create({
-                produto: produtoId,
-                data: data,
-                cliente: clienteId
+                produto: {
+                    nome: produto.nome,
+                    preco: produto.preco
+                },
+                
+                cliente: clienteId,
+                data: data
+                
             });
 
 
-            await cliente.save();
+            await user.save();
 
             res.status(200).json({ message: "Compra realizada com sucesso." });
         } catch (err) {

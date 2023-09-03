@@ -6,6 +6,7 @@ const compraSchema = new Schema({
         nome: { type: String, required: true }, // Nome do produto associado à compra
         preco: { type: Number, required: true }, // Preço do produto associado à compra
     },
+    cliente: {type: String, required:true},
     data: { type: Date, required: true }, // Data da compra
 });
 

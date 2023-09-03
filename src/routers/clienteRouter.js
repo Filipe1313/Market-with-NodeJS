@@ -8,12 +8,6 @@ app.use(express.json());
 
 
 
-clienteRouter.route('/api/register')
-    .post((req, res) => {
-        clienteControllers.createCliente(req, res);
-    })
-
-
 
 
 clienteRouter.route('/api/clientes')
@@ -21,6 +15,10 @@ clienteRouter.route('/api/clientes')
         clienteControllers.getClientes(req, res);
     })
 
+clienteRouter.route('/api/:id/recomendados')
+    .get((req, res) => {
+        clienteControllers.getProdutosPreferidos(req, res);
+    })
 
 
 clienteRouter.route('/api/cliente/:id')

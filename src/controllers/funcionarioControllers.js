@@ -25,7 +25,7 @@ module.exports = {
     // Atualizar funcionário por CPF (ou outro campo único)
     updateFuncionario: async (req, res) => {
         try {
-            // Certifique-se de que o tipo do usuário seja 'funcionario'
+            // Certificação de que o tipo do usuário seja 'funcionario'
             const filter = { _id: req.body._id, type: 'funcionario' };
 
             await UserModel.findOneAndUpdate(filter, req.body);
@@ -37,7 +37,7 @@ module.exports = {
 
     // Atualizar produtos
     updateProducts: async (req, res) => {
-        // Atualize os dados do produto selecionado.
+        // Atualização os dados do produto selecionado.
         try {
             const result = await ProductModel.updateMany({ categoria: req.body.categoria }, req.body);
             res.status(200).send({ message: "Produto atualizado com sucesso!" });
@@ -49,6 +49,13 @@ module.exports = {
     // Inserir promoção em produtos
     inserirPromocao: async (req, res) => {
         try {
+            
+            const user = UserModel.findById({ _id: req.params.id});       
+            
+            if (user.type != "funcionario" ) {
+                res.status(403).json({message: "Você não possui permissão."})
+                return;
+            }
             if (!req.body.categoria || !req.body.precoprom) {
                 res.status(400).json({ message: "Categoria e valor da promoção são obrigatórios." });
                 return;
@@ -63,6 +70,12 @@ module.exports = {
     // Remover promoção de produtos
     removerPromocao: async (req, res) => {
         try {
+            const user = UserModel.findById({ _id: req.params.id});       
+            
+            if (user.type != "funcionario" ) {
+                res.status(403).json({message: "Você não possui permissão."})
+                return;
+            }
             if (!req.body.categoria) {
                 res.status(400).json({ message: "Necessário uma categoria para alterar os valores." });
                 return;

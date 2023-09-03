@@ -1,5 +1,6 @@
 const  UserModel  = require('../models/userModel');
 const jwtService = require('jsonwebtoken');
+const clienteControllers = require('./clienteControllers');
 const secret = process.env.SECRET;
 
 module.exports = {
@@ -33,6 +34,8 @@ module.exports = {
             res.status(500).json({ message: "Erro interno do servidor." });
         }
     },
+
+
 
     createUser: async (req, res) => {
         try {
