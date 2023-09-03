@@ -1,4 +1,5 @@
 const ProductModel = require('../models/productModel');
+const UserModel = require('../models/userModel')
 
 
 module.exports = {
@@ -12,29 +13,32 @@ module.exports = {
 
     // Deletar produto pelo Codigo.
     deleteProductById: async (req, res) => {
+        const user =  await UserModel.findById({ _id: req.params.id1});       
+            
+            if (user.type != "funcionario" ) {
+                res.status(403).json({message: "Você não é um funcionario."})
+                return;
+            }
+        
         try {
-            await ProductModel.deleteProductById({ _id: req.params.id })
+            await ProductModel.deleteOne({ _id: req.params.id2 });
             res.status(200).send({ message: "Produto deletado com sucesso!" })
         } catch (err) {
             res.status(500).json({ message: "Não foi possivel remover o produto" })
         }
     },
 
-    // Pegar produto especifico.
-    getProduct: async (req, res) => {
-        try {
-            //Pega um unico produto pelo identificador que aqui é o código.
-            const result = await ProductModel.findById({ codigo: req.body.codigo })
-            res.status(200).send(result)
-        } catch (err) {
-            
 
-            res.status(500).json({ message: "Não foi possivel recuperar o produto." })
-        }
-    },
 
     // Criar o produto
     createProduct: async (req, res) => {
+            const user =  await UserModel.findById({ _id: req.params.id});       
+            
+            if (user.type != "funcionario" ) {
+                res.status(403).json({message: "Você não é um funcionario."})
+                return;
+            }
+
         try {
             const result = await ProductModel.create(req.body)
             res.status(201).json({ message: `O produto ${result._doc.nome} foi criado com sucesso!` })

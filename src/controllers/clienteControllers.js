@@ -13,6 +13,7 @@ module.exports = {
             });
     },
 
+    
     getProdutosPreferidos: async (req, res) => {
         
         try {
@@ -25,19 +26,19 @@ module.exports = {
         } catch (error) {
             res.status(404).json({ message: "Usuario não possui categorias preferidas"})
         }
-        }
-    };
+        },
+
 
 
     // Deletar cliente por ID
     deleteClienteById: async (req, res) => {
         try {
-            await UserModel.findOneAndDelete({ _id: req.params.id, type: 'cliente' }); // Verifica o type
+            const user = await UserModel.findOneAndDelete({ _id: req.params.id, type: 'cliente' });
             res.status(200).send({ message: "Cliente removido com sucesso." });
         } catch (err) {
             res.status(500).json({ message: "Não foi possível remover o cliente." });
         }
-    };
+    },
 
     // Atualizar cliente por CPF (ou outro campo único)
     updateCliente: async (req, res) => {
@@ -50,6 +51,7 @@ module.exports = {
         } catch (err) {
             res.status(500).json({ message: "Não foi possível atualizar os dados do cliente." });
         }
-    };
+    },
+}
 
 

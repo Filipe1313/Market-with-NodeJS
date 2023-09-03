@@ -1,6 +1,5 @@
 const  UserModel  = require('../models/userModel');
 const jwtService = require('jsonwebtoken');
-const clienteControllers = require('./clienteControllers');
 const secret = process.env.SECRET;
 
 module.exports = {

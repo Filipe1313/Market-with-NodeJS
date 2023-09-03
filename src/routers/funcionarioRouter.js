@@ -14,10 +14,7 @@ app.use(express.json());
 funcionarioRouter.route('/api/funcionario')
     .get((req, res) => {
         funcionarioControllers.getFuncionarios(req, res);
-    })
-    .post((req, res) => {
-        funcionarioControllers.inserirPromocao(req, res);
-    })
+    });
 
 
 
@@ -29,6 +26,9 @@ funcionarioRouter.route('/api/funcionario/:id')
     .delete((req, res) => {
         funcionarioControllers.deleteFuncionarioById(req, res);
 
+    })
+    .post((req, res) => {
+        funcionarioControllers.inserirPromocao(req, res);
     });
 
 funcionarioRouter.route('/api/:id/produtos')

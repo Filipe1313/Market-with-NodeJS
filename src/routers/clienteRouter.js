@@ -6,10 +6,6 @@ const app = express();
 
 app.use(express.json());
 
-
-
-
-
 clienteRouter.route('/api/clientes')
     .get((req, res) => {
         clienteControllers.getClientes(req, res);

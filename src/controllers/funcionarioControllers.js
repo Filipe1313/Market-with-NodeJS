@@ -26,7 +26,7 @@ module.exports = {
     updateFuncionario: async (req, res) => {
         try {
             // Certificação de que o tipo do usuário seja 'funcionario'
-            const filter = { _id: req.body._id, type: 'funcionario' };
+            const filter = { _id: req.params.id, type: 'funcionario' };
 
             await UserModel.findOneAndUpdate(filter, req.body);
             res.status(200).send({ message: "Funcionário atualizado no sistema." });
@@ -37,7 +37,13 @@ module.exports = {
 
     // Atualizar produtos
     updateProducts: async (req, res) => {
-        // Atualização os dados do produto selecionado.
+            const user = await UserModel.findById({ _id: req.params.id});       
+            
+            if (user.type != "funcionario" ) {
+                res.status(403).json({message: "Você não possui permissão."})
+                return;
+            }
+
         try {
             const result = await ProductModel.updateMany({ categoria: req.body.categoria }, req.body);
             res.status(200).send({ message: "Produto atualizado com sucesso!" });
