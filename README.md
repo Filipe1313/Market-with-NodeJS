@@ -5,10 +5,16 @@
 
 
 # Clientes
-### GET /api/clientes: Obtém uma lista de todos os clientes cadastrados.
-### GET /api/:id/recomendados: Obtém a lista de produtos recomendados para um cliente com base no ID fornecido.
-### PUT /api/cliente/:id: Atualiza as informações de um cliente com base no ID fornecido.
-### DELETE /api/cliente/:id: Deleta um cliente com base no ID fornecido.
+### GET /api/clientes : Obtém uma lista de todos os clientes cadastrados.
+### GET /api/:id/recomendados : Obtém a lista de produtos recomendados para um cliente com base no ID fornecido.
+### PUT /api/cliente/:id : Atualiza as informações de um cliente com base no ID fornecido.
+### DELETE /api/cliente/:id : Deleta um cliente com base no ID fornecido.
+
+
+# Funcionários
+### GET /api/funcionarios : Obtém uma lista de todos os funcionários cadastrados.
+### DELETE /api/funcionario/:id : Deleta um funcionário com base no ID fornecido.
+### PUT /api/funcionario/:id : Atualiza as informações de um funcionário com base no ID fornecido.
 
 
 # Compras
